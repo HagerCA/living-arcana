@@ -210,6 +210,18 @@ blockquote { margin: 0 0 12px; padding-left: 18px; border-left: 2px solid var(--
   background: radial-gradient(ellipse at center, rgba(201,166,92,.08), transparent 70%);
 }
 
+/* ---------- pixie ---------- */
+.pixie { display: grid; grid-template-columns: auto 1fr; gap: 50px; align-items: center; max-width: 1020px; margin: 0 auto; }
+.pixie .pair { display: flex; gap: 18px; }
+.pixie .pair .tcard { width: 170px; }
+.pixie .pair .tcard:last-child { transform: translateY(26px) rotate(3deg); }
+.pixie .pair .tcard:first-child { transform: rotate(-3deg); }
+.pixie ul { list-style: none; padding: 0; margin: 0 0 20px; }
+.pixie li { padding: 6px 0 6px 26px; position: relative; color: var(--ink); }
+.pixie li::before { content: "✦"; position: absolute; left: 0; color: var(--gold); font-size: 14px; top: 10px; }
+.pixie .read { color: var(--ink-2); }
+.hold { margin-top: 20px; font-size: 17.5px; color: var(--rose); font-style: italic; border-left: 2px solid var(--rose); padding-left: 16px; }
+
 /* ---------- circle ---------- */
 .firstread { text-align: center; font-family: var(--display); font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: var(--rose); margin-bottom: 34px; }
 .person {
@@ -329,8 +341,8 @@ footer p { max-width: 760px; margin: 8px auto; }
 @media (max-width: 900px) {
   .ladder { grid-template-columns: 1fr 1fr; }
   .spread, .result-spread { grid-template-columns: 1fr; }
-  .person, .dlg { grid-template-columns: 1fr; }
-  .person .cards { justify-content: center; }
+  .pixie, .person, .dlg { grid-template-columns: 1fr; }
+  .person .cards, .pixie .pair { justify-content: center; }
   .dlg .art { max-width: 260px; margin: 0 auto; }
   .station { grid-template-columns: 90px 1fr; gap: 20px; }
   .station .cardcol img { width: 90px; }

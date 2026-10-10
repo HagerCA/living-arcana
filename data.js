@@ -1,5 +1,5 @@
 // The Living Arcana: all content lives here. Edit text freely; app.js only renders it.
-// Public edition: the archetypes, the ladder, Christopher's own path, and the Reading.
+// Public edition. Built from the local edition by .ace/tmp/living-arcana-build-public.mjs.
 
 window.ARCANA = {};
 
@@ -341,6 +341,18 @@ ARCANA.christopher = {
   going: { id: "sage", far: "elder",
     text: `The Sage in the Marketplace, IV moving to V. And on the far horizon, the Elder, which nobody gets to claim.` },
   priestess: `A Priestess's gift in a man's body. Channeling, the hollow bone, the oracle's chair: the role history coded feminine. Divine Masculine Embodied doing the Priestess's oldest job is not a contradiction. It is the transmission.`
+};
+
+ARCANA.pixie = {
+  primary: "high-priestess", beside: "queen",
+  said: [
+    `"She's the one who calls me out on the things I can't see in myself, without judgment, from love."`,
+    `The second felt-sense on every unclear decision.`,
+    `Co-regulation: sometimes just a hug, sometimes simply being near her.`,
+    `The one who gets the better price, in a language that's hers.`
+  ],
+  read: `The High Priestess sees behind the veil without needing to look, and calls what she sees love. The Queen holds the realm: the table, the deal, the boundary, the nervous system of a household. Together since 2006, married since 2009. In this deck the Priestess beside the Sage is the oldest pairing there is: one knows, the other says.`,
+  hold: `Her story is hers. These cards are only SAGE's guess, face-up until she takes the Reading herself. Whatever she draws replaces them, and her level is hers to name.`
 };
 
 // ---------- The Reading ----------

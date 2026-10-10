@@ -68,6 +68,16 @@
     `<div class="item">${card(c.id, { size: "sm", noTitle: true, badge: false })}<small>${esc(c.note)}</small></div>`).join("")}</div>`;
   $("priestessNote").textContent = C.priestess;
 
+  // ---------- pixie ----------
+  const P = A.pixie;
+  if (P && $("pixieBlock")) $("pixieBlock").innerHTML = `
+    <div class="pair">${card(P.primary, { badge: false })}${card(P.beside, { badge: false })}</div>
+    <div>
+      <ul>${P.said.map((s) => `<li>${esc(s)}</li>`).join("")}</ul>
+      <p class="read">${esc(P.read)}</p>
+      <p class="hold">${esc(P.hold)}</p>
+    </div>`;
+
   // ---------- circle ----------
   if (A.circle && $("circleList")) $("circleList").innerHTML = A.circle.map((p) => `
     <div class="person">
