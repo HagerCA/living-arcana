@@ -464,7 +464,7 @@ ARCANA.path = [
     why: `The Sun is the card of being seen with nothing hidden.`,
     means: `This year exactly: from living the practice quietly to a visible demonstration. The Root Flame was lit underground. The Sun is the same fire with nothing left between it and the people it warms.` },
   { when: "Ahead", title: "The Horizon", card: "world", arch: ["elder"], tags: ["Elder · given, not claimed"],
-    text: `The village hands this card over when the men he blessed start blessing other men without him in the room. It has already started: the practice now runs two generations past the room it began in.`,
+    text: `The village hands this card over when the men he blessed start blessing other men without him in the room. It has already started: Tyler names the lineage out loud, Christopher to Austin to him.`,
     why: `The World is the last card of the Major Arcana: the journey complete.`,
     means: `Completion that turns straight back into beginning. The Elder's card isn't claimed. It's arrived at, when the work keeps moving without him in the room.` }
 ];
@@ -600,6 +600,24 @@ ARCANA.pixieNow = {
   note: `He learned to stop burning everything and start tending it. She learned to stop asking permission and start giving it to herself. The Sage and the Queen, side by side: one learned to say less, the other learned to say it out loud.`
 };
 // ---------- end Pixie's path ----------
+
+ARCANA.circle = [
+  { name: "Austin West", role: "Brother · co-facilitator · Friday circle · sacred circle of three",
+    primary: "king", secondary: "warrior", level: "III → IV · crossing into Embodied", calling: "high-priest",
+    why: `Christopher sees it and the record backs him: Austin is stepping into his kingship. Sixteen retreats planned for 2027, a growing body of facilitators he onboards himself, a Meet Your Facilitators page, men called forward into a mission bigger than any one of them. That is the King's work: deciding what the realm is for and blessing men into their place in it. The Warrior hasn't gone anywhere. Christopher's word for him is still the laser, and an entire facilitator system built in ninety minutes is the Warrior's focus serving the King's vision.`,
+    crossing: `The King's test: a realm still running on the Warrior's fuel. If he fights every battle himself, the kingdom depends on him. The mature King blesses other men to lead, and then lets them.`,
+    toward: `The High Priest. His facilitators sign four agreements before the door opens, which is a rite of passage, not a form. He is carrying medicine education to therapists, and he walks onto a stage unprepared on purpose to let whatever wants to come through come through. A King who is starting to hold the keys: initiating men into their own direct contact, not only into his mission.` },
+  { name: "Elliot", role: "Brother · Friday circle · sacred circle of three",
+    primary: "lover", secondary: "oracle", level: "IV · Embodied", calling: "oracle",
+    why: `"You can't help but not love Elliot. It's impossible not to love him." Pixie agreed without being asked. Warm and unguarded, and he scans the perimeter constantly, then comes back with what he found. Readings and support move between him and Christopher as an energetic exchange.`,
+    crossing: `The Lover's tender spot: needing love to come back before trusting that it's real. The cure is the gift, turned inward.`,
+    toward: `The wide field he scans is an Oracle's field. The next octave is trusting what he finds there without needing anyone to confirm it.` },
+  { name: "Tyler Drake", aka: "Tyzen", role: "Brother · tech guru · Friday circle · the one who pointed Christopher to ACE",
+    primary: "wizard", secondary: "priest", level: "IV · Embodied", calling: "alchemist",
+    why: `The technical one, who reads the mechanics under everything and then sends a nine-minute reading of Christopher at 11:21 at night with no caption. A teaching on eating by color mapped to the chakras. A minister in the Center for the New Christian Movement, with a Prayer of Remembering on his homepage. The Wizard with a Priest's heart.`,
+    crossing: `The Wizard's quiet trap: the build becomes the hiding place, the tower where the quest waits.`,
+    toward: `His own offer, in the division of labor they set together: Christopher harvests, Tyler catalyzes and amplifies. Catalysis is the Alchemist's art.` }
+];
 
 // ---------- The Reading ----------
 // Each option scores archetypes. Scores are normalized by each archetype's maximum,
