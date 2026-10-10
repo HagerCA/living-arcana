@@ -357,3 +357,47 @@ footer p { max-width: 760px; margin: 8px auto; }
 }
 
 .pos .tcard .cap { display: none; }
+
+/* ---------- clickable path cards ---------- */
+.scard { all: unset; cursor: pointer; display: block; position: relative; border-radius: 8px; transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+.station .cardcol .scard img { transition: box-shadow .35s, border-color .35s, filter .35s; }
+.scard:hover, .scard:focus-visible { transform: translateY(-6px) scale(1.04); }
+.scard:hover img, .scard:focus-visible img {
+  border-color: var(--gold-hi);
+  box-shadow: 0 18px 40px rgba(0,0,0,.6), 0 0 0 4px var(--night), 0 0 0 5px rgba(236,213,147,.7), 0 0 38px rgba(236,213,147,.35);
+  filter: sepia(0) saturate(1.05) brightness(1.06);
+}
+.scard-hint {
+  position: absolute; left: 50%; bottom: -26px; transform: translateX(-50%); white-space: nowrap;
+  font-family: var(--display); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-hi);
+  opacity: 0; transition: opacity .3s;
+}
+.scard:hover .scard-hint, .scard:focus-visible .scard-hint { opacity: 1; }
+button.tag { all: unset; cursor: pointer; font-family: var(--display); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; border: 1px solid rgba(201,166,92,.4); color: var(--gold-hi); padding: 4px 10px; border-radius: 20px; transition: background .2s, border-color .2s; }
+button.tag:hover, button.tag:focus-visible { background: rgba(201,166,92,.14); border-color: var(--gold-hi); }
+blockquote cite { display: block; font-style: normal; font-family: var(--display); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); margin-top: 6px; }
+
+/* ---------- station dialog ---------- */
+.dlg .ur { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+.dlg .ur div { border: 1px solid rgba(201,166,92,.25); border-radius: 10px; padding: 12px 14px; }
+.dlg .ur div.rv { border-color: rgba(201,138,138,.35); }
+.dlg .ur b { display: block; font-family: var(--display); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); font-weight: 400; margin-bottom: 4px; }
+.dlg .ur div.rv b { color: var(--rose); }
+.dlg .ur span { color: var(--ink-2); font-size: 17px; line-height: 1.45; display: block; }
+.dlg p.means { color: var(--ink); font-size: 19.5px; border-left: 2px solid var(--gold); padding-left: 16px; }
+.dlg .chips { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+.chip.big { all: unset; cursor: pointer; display: block; flex: 1 1 220px; padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(201,166,92,.35); background: rgba(201,166,92,.05); font-family: var(--display); font-size: 15px; letter-spacing: .06em; color: var(--ink); transition: background .2s, border-color .2s, transform .2s; }
+.chip.big small { display: block; font-family: var(--body); font-style: italic; letter-spacing: 0; font-size: 16px; color: var(--ink-2); margin-top: 4px; line-height: 1.35; }
+.chip.big:hover, .chip.big:focus-visible { background: rgba(201,166,92,.13); border-color: var(--gold-hi); transform: translateY(-2px); }
+.dlg-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 26px; padding-top: 16px; border-top: 1px solid rgba(201,166,92,.18); }
+.dlg-step, .dlg-back { all: unset; cursor: pointer; font-family: var(--display); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); transition: color .2s; }
+.dlg-step:hover, .dlg-back:hover, .dlg-step:focus-visible, .dlg-back:focus-visible { color: var(--gold-hi); }
+.dlg-back { position: absolute; top: 18px; left: 40px; }
+.dlg:has(.dlg-back) { padding-top: 56px; }
+
+/* ---------- pixie's path ---------- */
+.subhead { text-align: center; margin: 80px 0 40px; }
+.subhead h3 { font-family: var(--display); font-weight: 600; font-size: 34px; letter-spacing: .06em; margin: 8px 0; }
+.subhead p { color: var(--ink-2); font-style: italic; max-width: 720px; margin: 8px auto 0; }
+.draftnote { max-width: 780px; margin: 0 auto 40px; text-align: center; font-size: 17px; font-style: italic; color: var(--rose); border: 1px solid rgba(201,138,138,.3); border-radius: 12px; padding: 14px 22px; }
+@media (max-width: 900px) { .dlg .ur { grid-template-columns: 1fr; } .dlg-back { left: 20px; } }

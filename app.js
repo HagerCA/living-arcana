@@ -12,7 +12,7 @@
     const cls = ["tcard", opts.size || "", opts.reversed ? "reversed" : ""].join(" ");
     return `<button class="${cls}" data-arch="${id}" aria-label="Open ${esc(a.name)}">
       ${a.proposed && opts.badge !== false ? `<span class="badge">proposed</span>` : ""}
-      <span class="frame"><img src="${img(a.card.file)}" alt="" loading="lazy"></span>
+      <span class="frame"><img src="${img(opts.file || a.card.file)}" alt="" loading="lazy"></span>
       <span class="cap">
         ${opts.noTitle ? "" : `<span class="ttl">${esc(a.card.title)}</span>`}
         <span class="nm">${esc(opts.label || a.name)}</span>
@@ -42,31 +42,46 @@
     </div>`).join("");
   $("distinctions").innerHTML = A.distinctions.map((d) => `<p>${d}</p>`).join("");
 
-  // ---------- path ----------
-  $("pathList").innerHTML = A.path.map((s) => `
-    <div class="station">
-      <div class="cardcol"><img src="${img(s.card)}" alt="" loading="lazy"></div>
-      <div>
-        <div class="when">${esc(s.when)}</div>
-        <h3>${esc(s.title)}</h3>
-        <div class="tags">${s.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div>
-        ${s.quote ? `<blockquote>“${esc(s.quote)}”</blockquote>` : ""}
-        <p>${esc(s.text)}</p>
-      </div>
-    </div>`).join("");
+  // ---------- paths (Christopher, and Pixie when present) ----------
+  const PATHS = { c: { list: A.path, now: A.christopher }, p: { list: A.pixiePath, now: A.pixieNow } };
 
-  // ---------- christopher now ----------
-  const C = A.christopher;
-  $("nowSpread").innerHTML = `
-    <div class="pos"><div class="label">Where he stands</div>${card(C.stand.id, { badge: false })}
-      <h4>${esc(T[C.stand.id].name)}</h4><div class="lvl">${esc(C.stand.level)}</div><p>${esc(C.stand.text)}</p></div>
-    <div class="pos"><div class="label">What crosses him</div>${card(C.crossing.id, { reversed: true, badge: false, label: C.crossing.pole })}
-      <h4>${esc(C.crossing.pole)}</h4><div class="lvl">The Sage, reversed · passive shadow</div><p>${esc(C.crossing.text)}</p></div>
-    <div class="pos"><div class="label">Where he's going</div>${card(C.going.far, { badge: false })}
-      <h4>The Marketplace, then the Elder</h4><div class="lvl">IV → V</div><p>${esc(C.going.text)}</p></div>`;
-  $("carried").innerHTML = `<h4>Carried forward from the road</h4><div class="row">${C.carried.map((c) =>
-    `<div class="item">${card(c.id, { size: "sm", noTitle: true, badge: false })}<small>${esc(c.note)}</small></div>`).join("")}</div>`;
-  $("priestessNote").textContent = C.priestess;
+  function renderPath(key, elId) {
+    const P = PATHS[key];
+    if (!P.list || !$(elId)) return;
+    $(elId).innerHTML = P.list.map((s, i) => `
+      <div class="station">
+        <div class="cardcol"><button class="scard" data-path="${key}" data-i="${i}" aria-label="Read the ${esc(A.cards[s.card].name)} card">
+          <img src="${img(s.card)}" alt="" loading="lazy"><span class="scard-hint">read the card</span></button></div>
+        <div>
+          <div class="when">${esc(s.when)}</div>
+          <h3>${esc(s.title)}</h3>
+          <div class="tags">${s.tags.map((t, k) => s.arch && s.arch[k]
+            ? `<button class="tag chip" data-arch="${s.arch[k]}">${esc(t)}</button>`
+            : `<span class="tag">${esc(t)}</span>`).join("")}</div>
+          ${s.quote ? `<blockquote>“${esc(s.quote)}”${s.quoteBy ? `<cite>· ${esc(s.quoteBy)}</cite>` : ""}</blockquote>` : ""}
+          <p>${esc(s.text)}</p>
+        </div>
+      </div>`).join("");
+  }
+
+  function renderNow(N, ids) {
+    if (!N || !$(ids.spread)) return;
+    $(ids.spread).innerHTML = `
+      <div class="pos"><div class="label">Where ${N.he} stands</div>${card(N.stand.id, { badge: false })}
+        <h4>${esc(T[N.stand.id].name)}</h4><div class="lvl">${esc(N.stand.level)}</div><p>${esc(N.stand.text)}</p></div>
+      <div class="pos"><div class="label">What crosses ${N.him}</div>${card(N.crossing.id, { reversed: true, badge: false })}
+        <h4>${esc(N.crossing.pole)}</h4><div class="lvl">${esc(N.crossing.sub)}</div><p>${esc(N.crossing.text)}</p></div>
+      <div class="pos"><div class="label">Where ${N.he}'s going</div>${card(N.going.id, { badge: false, file: N.going.file })}
+        <h4>${esc(N.going.title)}</h4><div class="lvl">${esc(N.going.level)}</div><p>${esc(N.going.text)}</p></div>`;
+    $(ids.carried).innerHTML = `<h4>Carried forward from the road</h4><div class="row">${N.carried.map((c) =>
+      `<div class="item">${card(c.id, { size: "sm", noTitle: true, badge: false })}<small>${esc(c.note)}</small></div>`).join("")}</div>`;
+    $(ids.note).textContent = N.note;
+  }
+
+  renderPath("c", "pathList");
+  renderNow(A.christopher, { spread: "nowSpread", carried: "carried", note: "priestessNote" });
+  renderPath("p", "pixiePathList");
+  renderNow(A.pixieNow, { spread: "pixieNowSpread", carried: "pixieCarried", note: "pixiePairNote" });
 
   // ---------- pixie ----------
   const P = A.pixie;
@@ -101,10 +116,13 @@
 
   // ---------- dialog ----------
   const dlg = $("dlg");
-  function openArch(id) {
+  function show() { if (!dlg.open) dlg.showModal(); dlg.scrollTop = 0; dlg.querySelector(".close").addEventListener("click", () => dlg.close()); }
+
+  function openArch(id, back) {
     const a = T[id], h = houseOf(id);
+    const backBtn = back ? `<button class="dlg-back" data-path="${back.path}" data-i="${back.i}">← back to ${esc(A.cards[PATHS[back.path].list[back.i].card].name)}</button>` : "";
     dlg.innerHTML = `<div class="dlg" style="position:relative">
-      <button class="close" aria-label="Close">×</button>
+      <button class="close" aria-label="Close">×</button>${backBtn}
       <div class="art"><img src="${img(a.card.file)}" alt="${esc(a.card.title)}">
         <div class="ttl">${esc(a.card.title)}</div><div class="why">${esc(a.cardWhy)}</div></div>
       <div>
@@ -124,12 +142,42 @@
         <h5>You'll know them by</h5><p>${esc(a.knowBy)}</p>
         ${a.source ? `<div class="src">Structure from ${esc(a.source)}, <i>King, Warrior, Magician, Lover</i>.</div>` : ""}
       </div></div>`;
-    dlg.showModal();
-    dlg.querySelector(".close").addEventListener("click", () => dlg.close());
+    show();
   }
+
+  // a station card: why it was drawn there, what the card is, what it means for this person
+  function openStation(key, i) {
+    const P = PATHS[key], s = P.list[i], c = A.cards[s.card];
+    const chips = (s.arch || []).map((id) => `<button class="chip big" data-arch="${id}" data-from-path="${key}" data-from-i="${i}">${esc(T[id].name)}<small>${esc(T[id].essence)}</small></button>`).join("");
+    const nav = (d) => { const j = i + d; return j >= 0 && j < P.list.length ? `<button class="dlg-step" data-path="${key}" data-i="${j}">${d < 0 ? "← " : ""}${esc(P.list[j].title)}${d > 0 ? " →" : ""}</button>` : "<span></span>"; };
+    dlg.innerHTML = `<div class="dlg" style="position:relative">
+      <button class="close" aria-label="Close">×</button>
+      <div class="art"><img src="${img(s.card)}" alt="${esc(c.name)}">
+        <div class="ttl">${c.num.includes("·") ? esc(c.name) : esc(c.num) + " · " + esc(c.name)}</div></div>
+      <div>
+        <div class="house-tag">${esc(P.now.who)}'s Path · ${esc(s.when)}</div>
+        <h2>${esc(s.title)}</h2>
+        <div class="essence">${esc(s.why)}</div>
+        <h5>The card itself</h5><p>${esc(c.image)}</p>
+        <div class="ur">
+          <div><b>Upright</b><span>${esc(c.upright)}</span></div>
+          <div class="rv"><b>Reversed</b><span>${esc(c.reversed)}</span></div>
+        </div>
+        <h5>The teaching</h5><p>${esc(c.teaching)}</p>
+        <h5>What it means for ${esc(P.now.who)}</h5><p class="means">${esc(s.means)}</p>
+        ${chips ? `<h5>The archetypes in play</h5><div class="chips">${chips}</div>` : ""}
+        <div class="dlg-nav">${nav(-1)}${nav(1)}</div>
+      </div></div>`;
+    show();
+  }
+
   dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
 
   document.addEventListener("click", (e) => {
+    const st = e.target.closest(".scard, .dlg-step, .dlg-back");
+    if (st) { openStation(st.dataset.path, +st.dataset.i); return; }
+    const ch = e.target.closest(".chip");
+    if (ch) { openArch(ch.dataset.arch, ch.dataset.fromPath ? { path: ch.dataset.fromPath, i: +ch.dataset.fromI } : null); return; }
     const b = e.target.closest(".tcard");
     // the Reading replaces its own buttons on click, so a detached card belongs to it too
     if (!b || !b.isConnected || b.closest("#readingBox")) return;
