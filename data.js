@@ -165,7 +165,7 @@ ARCANA.archetypes = {
     practice: `Pick one hero and serve their quest without needing credit for it.`
   },
   alchemist: {
-    name: "The Alchemist", house: "workers", proposed: true,
+    name: "The Alchemist", house: "workers",
     card: { file: "temperance", title: "XIV · Temperance" },
     essence: `Transmutes lead into gold: wound into medicine, shadow into gift.`,
     cardWhy: `The angel pours between two cups, one foot in water and one on land. In the Thoth deck this card is renamed "Art," meaning the alchemical art itself: solve et coagula, dissolve and rejoin.`,
@@ -208,7 +208,7 @@ ARCANA.archetypes = {
     source: "Moore & Gillette"
   },
   queen: {
-    name: "The Queen", house: "sovereigns", proposed: true,
+    name: "The Queen", house: "sovereigns",
     card: { file: "empress", title: "III · The Empress" },
     essence: `Holds the realm through nourishment and boundary.`,
     cardWhy: `Wheat ripening at her feet, a stream running through her garden, Venus on her shield. Her sovereignty is fertile: things grow where she sits.`,
@@ -280,7 +280,7 @@ ARCANA.archetypes = {
     practice: `Mentor one person this year with no agenda but their flourishing.`
   },
   fool: {
-    name: "The Holy Fool", house: "wise", proposed: true,
+    name: "The Holy Fool", house: "wise",
     card: { file: "fool", title: "0 · The Fool" },
     essence: `Wisdom in a jester's hat. The truth delivered so lightly it gets past the guard.`,
     cardWhy: `Zero: before the journey and beyond it. He steps off the cliff with a white rose in his hand and a dog at his heels. Trust as a spiritual practice.`,
