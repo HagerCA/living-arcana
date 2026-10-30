@@ -1,0 +1,133 @@
+/* Christopher Hager brand layer for the personal Arcana views (person.html pages).
+   Sits on top of style.css: same layout, brand palette, type and marks.
+   Palette and type from Domains/practice/brand-kit.md, matched to the Soul Family Blueprint kit.
+   Every asset is beside the page in ./brand/. Nothing loads from the internet. */
+
+@font-face { font-family: "Space Grotesk"; src: url("./brand/fonts/SpaceGrotesk-a57c9413.woff2") format("woff2"); font-weight: 300 700; font-display: swap; }
+@font-face { font-family: "DM Sans"; src: url("./brand/fonts/DMSans-f6298972.woff2") format("woff2"); font-weight: 100 1000; font-display: swap; }
+@font-face { font-family: "Instrument Serif"; src: url("./brand/fonts/InstrumentSerif-99cc6edf.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Instrument Serif"; src: url("./brand/fonts/InstrumentSerif-fa1a1a83.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+
+:root {
+  /* CROWN, MYSTIC, ANKH, TRITON, GAIA; gold lifted for legibility on dark, as the Blueprints do */
+  --night: #1B0C20;
+  --night-2: #2A1130;
+  --night-3: #3B1A4C;
+  --gold: #D9A648;
+  --gold-hi: #EBC57A;
+  --gold-lo: #A57626;
+  --ink: #EFE7DA;
+  --ink-2: #D2C7B8;
+  --ink-3: #A29589;
+  --rose: #D88FAE;
+  --violet: #AC9FF2;
+  --wine: #7C2D50;
+  --gaia: #1D3237;
+  --display: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --deco: "Instrument Serif", Georgia, serif;
+  --serif: "Instrument Serif", Georgia, serif;
+  --body: "DM Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+body { font-size: 17.5px; line-height: 1.65; }
+
+/* the signature gradient: wine at the edges falling to CROWN, with the halftone over it */
+body::before {
+  background:
+    radial-gradient(ellipse 70% 45% at 50% 0%, rgba(165,118,38,.12), transparent 70%),
+    radial-gradient(ellipse 130% 110% at 50% 45%, #1B0C20 0%, #22102A 50%, #4A1838 85%, #7C2D50 125%);
+}
+body::after {
+  animation: none; opacity: .5;
+  background-image: radial-gradient(rgba(239,231,218,.08) 1px, transparent 1.2px);
+  background-size: 7px 7px;
+}
+
+/* ---------- nav with the inline logo ---------- */
+nav.top { background: rgba(27,12,32,.86); border-bottom: 1px solid rgba(165,118,38,.35); }
+nav.top .wrap { justify-content: space-between; align-items: center; gap: 18px; }
+nav.top .brand-logo { display: block; line-height: 0; }
+nav.top .brand-logo img { height: 26px; width: auto; display: block; }
+nav.top .links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: flex-end; }
+nav.top a { font-weight: 500; font-size: 11.5px; letter-spacing: .2em; }
+
+/* ---------- hero ---------- */
+header.hero { padding: 70px 0 40px; }
+.hero .mark { width: 62px; height: auto; display: block; margin: 0 auto 22px; opacity: .96; }
+.eyebrow { font-weight: 500; font-size: 12px; letter-spacing: .32em; }
+h1 {
+  font-family: var(--serif); font-weight: 400; letter-spacing: 0;
+  font-size: clamp(64px, 10vw, 128px); line-height: 1;
+}
+.hero .sub { font-family: var(--serif); font-size: clamp(22px, 2.6vw, 28px); }
+.hero .byline { font-weight: 500; font-size: 11px; letter-spacing: .26em; }
+.fan img { border-color: rgba(217,166,72,.6); box-shadow: 0 18px 50px rgba(0,0,0,.6), 0 0 0 4px rgba(27,12,32,.92), 0 0 0 5px rgba(165,118,38,.45); }
+
+/* ---------- section heads with a glyph ---------- */
+.shead .glyph { height: 30px; width: auto; display: block; margin: 0 auto 14px; opacity: .9; }
+.shead .num { font-weight: 500; font-size: 12px; }
+.shead h2 { font-family: var(--serif); font-weight: 400; letter-spacing: .01em; font-size: clamp(38px, 5vw, 56px); }
+.shead p { font-family: var(--serif); font-size: 22px; }
+
+.draftnote { font-family: var(--serif); font-size: 19px; color: var(--rose); border-color: rgba(216,143,174,.35); background: rgba(124,45,80,.12); }
+.draftnote img { height: 22px; width: auto; display: block; margin: 0 auto 8px; opacity: .85; }
+
+/* ---------- path ---------- */
+.station .when { font-weight: 500; font-size: 11.5px; }
+.station h3 { font-family: var(--serif); font-weight: 400; font-size: 32px; letter-spacing: .01em; }
+.station blockquote { font-family: var(--serif); font-size: 21px; }
+.tag { font-weight: 500; font-size: 10px; border-color: rgba(217,166,72,.45); }
+.path::before { background: linear-gradient(180deg, transparent, var(--gold-lo) 6%, var(--gold-lo) 94%, transparent); }
+
+/* ---------- where they stand ---------- */
+.pos { background: linear-gradient(180deg, rgba(59,26,76,.55), rgba(27,12,32,.7)); border-color: rgba(165,118,38,.35); }
+.pos .label, .pos .lvl, .carried h4 { font-weight: 500; }
+.pos h4 { font-family: var(--serif); font-weight: 400; font-size: 26px; letter-spacing: .01em; }
+.pos p { font-size: 16.5px; line-height: 1.55; }
+.carried .item small { font-family: var(--serif); font-size: 16.5px; }
+.callout { font-family: var(--serif); font-size: 24px; border-color: rgba(165,118,38,.4); background: radial-gradient(ellipse at center, rgba(124,45,80,.22), transparent 72%); }
+.callout-mark { height: 34px; width: auto; display: block; margin: 40px auto -22px; opacity: .9; position: relative; z-index: 1; }
+
+/* ---------- dialog ---------- */
+dialog { background: linear-gradient(160deg, #2A1130, #1B0C20 70%); border-color: rgba(165,118,38,.55); }
+.dlg h2 { font-family: var(--serif); font-weight: 400; font-size: 42px; letter-spacing: .01em; }
+.dlg .essence, .dlg .art .why { font-family: var(--serif); }
+.dlg .essence { font-size: 25px; }
+.dlg p { font-size: 17px; }
+.dlg p.means { font-size: 18px; }
+.dlg h5, .dlg .house-tag, .dlg .art .ttl, .dlg .lad b, .dlg .ur b, .dlg-step, .dlg-back { font-weight: 500; }
+.dlg .lad strong { font-size: 17px; }
+.dlg .lad span, .dlg .ur span { font-size: 15.5px; }
+.chip.big small { font-family: var(--serif); font-size: 17px; }
+.dlg .art img { background: #22102A; }
+
+/* ---------- the main atlas (index.html): ladder, houses, circle, reading ---------- */
+.rung .n, .house-head .hn { font-family: var(--serif); font-size: 40px; }
+.rung h3 { font-weight: 500; font-size: 13.5px; }
+.house-head h3, .person h3, .subhead h3, .reading h3 { font-family: var(--serif); font-weight: 400; letter-spacing: .01em; }
+.house-head h3 { font-size: 32px; }
+.person h3 { font-size: 36px; }
+.subhead h3 { font-size: 40px; }
+.reading h3 { font-size: 32px; }
+.rpos h4 { font-family: var(--serif); font-weight: 400; font-size: 24px; }
+.tcard .nm { font-family: var(--serif); font-weight: 400; font-size: 20px; letter-spacing: .01em; }
+.tcard .ttl, button.tag { font-weight: 500; }
+.subhead p, .person .role, .three-q, .bridge, .distinctions p { font-family: var(--serif); }
+.btn { font-family: var(--display); font-weight: 600; }
+.subhead .glyph { height: 26px; width: auto; display: block; margin: 0 auto 12px; opacity: .9; }
+footer.brand p { font-size: 14.5px; color: var(--ink-3); max-width: 760px; margin: 8px auto; }
+footer.brand .credits { margin-top: 28px; }
+
+/* ---------- footer ---------- */
+footer.brand { margin-top: 70px; padding: 46px 0 60px; border-top: 1px solid rgba(165,118,38,.35); text-align: center; background: rgba(27,12,32,.6); }
+footer.brand .mark { width: 44px; height: auto; display: block; margin: 0 auto 14px; }
+footer.brand .name { font-family: var(--display); font-weight: 500; font-size: 12px; letter-spacing: .32em; text-transform: uppercase; color: var(--ink); }
+footer.brand .promise { font-family: var(--serif); font-style: italic; font-size: 21px; color: var(--gold-hi); margin: 8px 0 6px; }
+footer.brand .site { font-family: var(--display); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--ink-3); }
+footer.brand .site a { color: var(--ink-3); text-decoration: none; }
+footer.brand .site a:hover { color: var(--gold-hi); }
+
+@media (max-width: 700px) {
+  nav.top .wrap { justify-content: center; }
+  nav.top .links { justify-content: center; gap: 16px; }
+}
